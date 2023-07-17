@@ -3,6 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\Scopes\UserActiveScope;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -51,6 +55,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected $append = ['full_name'];
+
+    public function fullName(): Attribute
+    {
+        return new Attribute(
+            get: fn () => $this->first_name . ' ' . $this->last_name,
+        );
+    }
+    public function username(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => Str::slug($value),
+        );
+    }
     /**
      * Get all of the articles for the User
      *
@@ -59,5 +78,15 @@ class User extends Authenticatable
     public function articles(): HasMany
     {
         return $this->hasMany(Article::class);
+    }
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new UserActiveScope);
+    }
+
+    public function scopeIsAdmin($query)
+    {
+        return $query->where('is_admin', true);
     }
 }
