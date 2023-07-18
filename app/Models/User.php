@@ -26,7 +26,6 @@ class User extends Authenticatable
         'username',
         'first_name',
         'last_name',
-        'is_active',
         'email',
         'password',
     ];
@@ -62,6 +61,14 @@ class User extends Authenticatable
     {
         return new Attribute(
             get: fn () => $this->first_name . ' ' . $this->last_name,
+            set: function ($value) {
+                $names = explode(' ', $value);
+
+                return [
+                    'first_name' => $names[0] ?? '',
+                    'last_name' => $names[1] ?? '',
+                ];
+            }
         );
     }
     public function username(): Attribute
