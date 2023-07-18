@@ -14,7 +14,7 @@ class Article extends Model
         'title',
         'description',
         'body',
-        'like',
+        'author_id',
     ];
     /**
      * Get the user that owns the Article
