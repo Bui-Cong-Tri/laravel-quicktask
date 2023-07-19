@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LangController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,8 @@ Route::prefix('/users')->middleware('checkAdmin')->name('users.')->controller(Us
     Route::put('/{id}', 'update')->name('update');
     Route::delete('/{id}', 'destroy')->name('destroy');
 });
+
+Route::get('change-language/{language}', [LangController::class, 'changeLanguage'])->name('change-language');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
