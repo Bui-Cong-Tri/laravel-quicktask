@@ -1,0 +1,12 @@
+{
+    "name": "laravel-quicktask",
+    "description": "",
+    "main": "",
+    "authors": ["Luxion Rob <aidaynhi@gmail.com>"],
+    "license": "MIT",
+    "homepage": "",
+    "ignore": ["**/.*", "node_modules", "bower_components", "test", "tests"],
+    "dependencies": {
+        "light-bootstrap-dashboard": "https://github.com/Bui-Cong-Tri/light-bootstrap-dashboard.git"
+    }
+}
