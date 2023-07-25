@@ -12,9 +12,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        // $articles = Article::all();
+        $articles = Article::all();
 
-        // return view('articles.index')->with('articles', $articles);
+        return view('articles.index')->with('articles', $articles);
     }
 
     /**
@@ -22,7 +22,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        // return view('articles.create');
+        return view('articles.create');
     }
 
     /**
@@ -40,9 +40,9 @@ class ArticleController extends Controller
      */
     public function show(string $id)
     {
-        // $article = Article::find($id);
+        $article = Article::find($id);
 
-        // return view('articles.show')->with('article', $article);
+        return view('articles.show')->with('article', $article);
     }
 
     /**
@@ -50,9 +50,9 @@ class ArticleController extends Controller
      */
     public function edit(string $id)
     {
-        // $article = Article::find($id);
+        $article = Article::find($id);
 
-        // return view('articles.edit')->with('article', $article);
+        return view('articles.edit')->with('article', $article);
     }
 
     /**
