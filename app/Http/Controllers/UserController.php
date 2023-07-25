@@ -12,9 +12,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        // $users = User::all();
+        $users = User::all();
 
-        // return view('users.index')->with('users', $users);
+        return view('users.index')->with('users', $users);
     }
 
     /**
@@ -22,7 +22,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        // return view('users.create');
+        return view('users.create');
     }
 
     /**
@@ -45,9 +45,9 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        // $user = User::find($id);
+        $user = User::find($id);
 
-        // return view('users.show')->with('user', $user);
+        return view('users.show')->with('user', $user);
     }
 
     /**
@@ -55,9 +55,9 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        // $user = User::find($id);
+        $user = User::find($id);
 
-        // return view('users.edit')->with('user', $user);
+        return view('users.edit')->with('user', $user);
     }
 
     /**

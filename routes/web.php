@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\LangController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -26,10 +27,10 @@ Route::prefix('/users')->middleware('checkAdmin')->name('users.')->controller(Us
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
     Route::post('/', 'store')->name('store');
-    Route::get('/{id}', 'show')->name('show');
-    Route::get('/{id}/edit', 'edit')->name('edit');
-    Route::put('/{id}', 'update')->name('update');
-    Route::delete('/{id}', 'destroy')->name('destroy');
+    Route::get('/{user}', 'show')->name('show');
+    Route::get('/{user}/edit', 'edit')->name('edit');
+    Route::put('/{user}', 'update')->name('update');
+    Route::delete('/{user}', 'destroy')->name('destroy');
 });
 
 Route::get('change-language/{language}', [LangController::class, 'changeLanguage'])->name('change-language');
