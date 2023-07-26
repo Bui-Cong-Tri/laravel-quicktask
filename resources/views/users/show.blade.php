@@ -17,12 +17,17 @@
                             class="block mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             {{ __('Edit') }}
                         </a>
-                        <a href="{{ route('users.destroy', ['user' => $user->id]) }}"
-                            class="block mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                            {{ __('Delete') }}
-                        </a>
+                        <form method="POST"
+                            action="{{ route('users.destroy', $user->id) }}"class="block mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                data-confirm="{{ __('Confirm Delete') }}">{{ __('Delete') }}</button>
+                        </form>
                     </div>
-                    <h2 class="text-2xl font-semibold mt-8 mb-4">{{ __('message.user.show.article.title') }}</h2>
+                    <h2 class="text-2xl
+                                font-semibold mt-8 mb-4">
+                        {{ __('message.user.show.article.title') }}</h2>
                     @if ($user->articles->count() > 0)
                         <ul class="divide-y divide-gray-200">
                             @foreach ($user->articles as $article)
@@ -30,12 +35,14 @@
                                     <h3 class="text-xl font-semibold"><a
                                             href="{{ route('articles.show', $article->id) }}">{{ $article->title }}</a>
                                     </h3>
-                                    <p class="text-gray-600 dark:text-gray-400">{{ $article->description }}</p>
+                                    <p class="text-gray-600 dark:text-gray-400">{{ $article->description }}
+                                    </p>
                                 </li>
                             @endforeach
                         </ul>
                     @else
-                        <p class="text-gray-600 dark:text-gray-400">{{ __('message.user.show.article.empty') }}</p>
+                        <p class="text-gray-600 dark:text-gray-400">
+                            {{ __('message.user.show.article.empty') }}</p>
                     @endif
                 </div>
             </div>

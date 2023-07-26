@@ -27,9 +27,14 @@ return [
         'create' => [
             'title' => 'Create article',
         ],
+        'delete' => [
+            'success' => 'Article created successfully!',
+        ],
     ],
     'user' => [
         'username' => 'Username',
+        'fullName' => 'Full name',
+        'password' => "Password",
         'index' => [
             'title' => 'Users',
             'table' => [
@@ -47,6 +52,18 @@ return [
         ],
         'edit' => [
             'title' => 'Edit user',
+        ],
+        'update' => [
+            'success' => 'User updated successfully!',
+        ],
+        'create' => [
+            'title' => 'Add New User',
+        ],
+        'store' => [
+            'success' => 'User created successfully!',
+        ],
+        'destroy' => [
+            'success' => 'User deleted successfully!',
         ],
     ],
 
