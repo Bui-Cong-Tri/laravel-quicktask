@@ -14,10 +14,12 @@
                         class="block mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         {{ __('Edit') }}
                     </a>
-                    <a href="{{ route('articles.destroy', ['article' => $article->id]) }}"
-                        class="block mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                        {{ __('Delete') }}
-                    </a>
+                    <form method="POST"
+                        action="{{ route('articles.destroy', $article->id) }}"class="block mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" data-confirm="{{ __('Confirm Delete') }}>{{ __('Delete') }}</button>
+                    </form>
                 </div>
             </div>
         </div>

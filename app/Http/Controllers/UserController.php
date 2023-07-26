@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
+
 
 class UserController extends Controller
 {
@@ -28,24 +30,25 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
-        // $user = new User;
-        // $user->fullName = $request->input('fullName');
-        // $user->email = $request->input('email');
-        // $user->username = $request->input('username');
-        // $user->password = bcrypt($request->input('password'));
-        // $user->save();
+        $user = new User;
+        $validated = $request->validated();
+        $user->fullName = $validated['fullname'];
+        $user->email = $validated['email'];
+        $user->username = $validated['username'];
+        $user->password = bcrypt($validated['password']);
+        $user->save();
 
-        // return redirect()->route('users.index')->with('success', "User created successfully!");
+        return redirect()->route('users.index')->with('success', trans('message.user.store.success'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        $user = User::find($id);
+        $user->load('articles');
 
         return view('users.show')->with('user', $user);
     }
@@ -53,35 +56,32 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
-
         return view('users.edit')->with('user', $user);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        // $user = User::find($id);
-        // $user->fullName = $request->input('fullName');
-        // $user->email = $request->input('email');
-        // $user->username = $request->input('username');
-        // $user->password = bcrypt($request->input('password'));
-        // $user->save();
+        $validated = $request->validated();
+        $user->fullName = $validated['fullname'];
+        $user->email = $validated['email'];
+        $user->username = $validated['username'];
+        $user->save();
 
-        // return redirect()->route('users.show', ['user' => $id])->with('success', "User updated successfully!");
+        return redirect()->route('users.show', ['user' => $user->id])->with('success', trans('message.user.update.success'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        // User::destroy($id);
+        $user->delete;
 
-        // return redirect()->route('users.index')->with('success', "User deleted successfully!");
+        return redirect()->route('users.index')->with('success', trans('message.user.destroy.success'));
     }
 }

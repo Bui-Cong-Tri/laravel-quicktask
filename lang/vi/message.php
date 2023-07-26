@@ -27,9 +27,14 @@ return [
         'create' => [
             'title' => 'Create article',
         ],
+        'delete' => [
+            'success' => 'Tạo bài viết thành công',
+        ],
     ],
     'user' => [
         'username' => 'Tên người dùng',
+        'fullName' => 'Họ và tên',
+        'password' => "Mật khẩu",
         'index' => [
             'title' => 'Danh sách người dùng',
             'table' => [
@@ -48,6 +53,17 @@ return [
         'edit' => [
             'title' => 'Chỉnh sửa thông tin người dùng',
         ],
-
-    ]
+        'update' => [
+            'success' => 'Cập nhật thành công!',
+        ],
+        'create' => [
+            'title' => 'Thêm người dùng',
+        ],
+        'store' => [
+            'success' => 'Tạo bài viết thành công!',
+        ],
+        'destroy' => [
+            'success' => 'Xóa người dùng thành công',
+        ],
+    ],
 ];
