@@ -25,4 +25,8 @@ class Article extends Model
     {
         return $this->belongsTo(User::class, 'author_id');
     }
+    protected $casts = [
+        'created_at' => 'date:d/m/Y',
+        'updated_at' => 'date:d/m/Y',
+    ];
 }

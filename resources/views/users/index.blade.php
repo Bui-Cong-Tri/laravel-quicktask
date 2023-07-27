@@ -17,6 +17,7 @@
                                 <th class="px-4 py-2 w-1/12">{{ __('message.user.index.table.id') }}</th>
                                 <th class="px-4 py-2">{{ __('message.user.index.table.username') }}</th>
                                 <th class="px-4 py-2">Email</th>
+                                <th class="px-4 py-2 w-1/4">{{ __('Create At') }}</th>
                                 <th class="px-4 py-2 w-1/4">{{ __('message.user.index.table.actions') }}</th>
                             </tr>
                         </thead>
@@ -26,6 +27,7 @@
                                     <td class="border px-4 py-2">{{ $user->id }}</td>
                                     <td class="border px-4 py-2">{{ $user->username }}</td>
                                     <td class="border px-4 py-2">{{ $user->email }}</td>
+                                    <td class="border px-4 py-2">{{ formatDate($user->created_at) }}</td>
                                     <td class="border px-4 py-2 flex justify-evenly">
                                         <a href="{{ route('users.show', $user->id) }}"
                                             class="block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

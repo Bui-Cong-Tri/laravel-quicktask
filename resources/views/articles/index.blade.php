@@ -8,8 +8,13 @@
                     <ul class="divide-y divide-gray-200">
                         @foreach ($articles as $article)
                             <li class="py-4">
-                                <h3 class="text-xl font-semibold dark:text-gray-400"><a
-                                        href="{{ route('articles.show', ['article' => $article->id]) }}">{{ $article->title }}</a>
+                                <h3 class="text-xl font-semibold dark:text-gray-400">
+                                    <a href="{{ route('articles.show', ['article' => $article->id]) }}">
+                                        {{ $article->title }}
+                                    </a>
+                                    <span class="ml-4 font-thin text-sm opacity-80">
+                                        ({{ formatDate($article->created_at) }})
+                                    </span>
                                 </h3>
                                 <p class="text-gray-600 dark:text-gray-400">{{ $article->description }}</p>
                             </li>
