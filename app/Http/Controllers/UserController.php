@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Article;
 use App\Models\User;
-
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -80,7 +81,11 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete;
+        DB::transaction(function () use ($user) {
+            $user->load('articles');
+            Article::destroy($user->articles->pluck('id'));
+            $user->delete();
+        });
 
         return redirect()->route('users.index')->with('success', trans('message.user.destroy.success'));
     }
