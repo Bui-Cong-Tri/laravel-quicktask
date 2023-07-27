@@ -22,6 +22,7 @@ Route::get('/', function () {
 });
 
 Route::resource('/articles', ArticleController::class);
+Route::get('/articles/create/{id}', [ArticleController::class, 'createWithId'])->name('articles.createWithId');
 
 Route::prefix('/users')->middleware('checkAdmin')->name('users.')->controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('index');

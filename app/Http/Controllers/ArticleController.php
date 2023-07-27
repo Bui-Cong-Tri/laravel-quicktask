@@ -23,9 +23,13 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        return view('articles.create')->with('id',  Auth::id());
     }
 
+    public function createWithId(int $id)
+    {
+        return view('articles.create')->with('id', $id);
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -33,7 +37,7 @@ class ArticleController extends Controller
     {
         $validated = $request->validated();
         $validated['body'] = json_encode(explode(PHP_EOL, str_replace("\r", '', $validated['body'])));
-        $validated['author_id'] = Auth::user()->id;
+        $validated['author_id'] = $validated['author_id'];
         Db::table('articles')->insert($validated);
 
         return redirect()->route('articles.index')->with('success', trans('message.article.store.success'));

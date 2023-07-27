@@ -6,6 +6,11 @@
                     <h2 class="text-2xl font-semibold mb-4">{{ __('message.article.create.title') }}</h2>
                     <form action="{{ route('articles.store') }}" method="POST">
                         @csrf
+
+                        <input
+                            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
+                            name="author_id" value="{{ $id }}" type="text">
+
                         <div class="mb-4">
                             <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                                 {{ __('message.article.title') }}

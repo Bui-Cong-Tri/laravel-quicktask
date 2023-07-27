@@ -9,7 +9,7 @@
                         {{ $user->username }}</p>
                     <p class="dark:text-gray-600"><strong>Email:</strong> {{ $user->email }}</p>
                     <div class="flex justify-end mt-4 pb-4">
-                        <a href="{{ route('articles.create') }} "
+                        <a href="{{ route('articles.createWithId', $user->id) }} "
                             class="block mr-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                             {{ __('Create New Article') }}
                         </a>

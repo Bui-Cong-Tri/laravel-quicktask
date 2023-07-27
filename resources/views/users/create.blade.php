@@ -4,6 +4,7 @@
         <h1 class="text-4xl font-bold mb-4">{{ __('message.user.create.title') }}</h1>
         <form action="{{ route('users.store') }}" method="POST">
             @csrf
+
             <div class="mb-4">
                 <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2"
                     for="username">{{ __('message.user.username') }}</label>
