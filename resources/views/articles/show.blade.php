@@ -3,7 +3,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white dark:bg-gray-900 border-b border-gray-200">
-                    <h2 class="text-2xl font-semibold mb-4 text-gray-700 dark:text-gray-500">{{ $article->title }}</h2>
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-700 dark:text-gray-500">
+                        {{ $article->title }}
+                        <span class="ml-4 text-sm font-thin">(
+                            {{ __('Create At') }}
+                            {{ formatDate($article->created_at) }})
+                        </span>
+                    </h2>
                     <p class="text-gray-600 dark:text-gray-600 italic text-sm mb-8">{{ $article->description }}</p>
                     @foreach (json_decode($article->body) as $paragraph)
                         <p class="text-gray-600 dark:text-gray-400 indent-3 mb-2">{{ $paragraph }}</p>

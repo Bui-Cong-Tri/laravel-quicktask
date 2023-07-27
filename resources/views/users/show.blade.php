@@ -5,8 +5,14 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white dark:bg-gray-900 border-b border-gray-200 dark:text-gray-400">
                     <h2 class="text-2xl font-semibold mb-4">{{ __('message.user.show.title') }}</h2>
-                    <p class="dark:text-gray-600"><strong>{{ __('message.user.username') }}:</strong>
-                        {{ $user->username }}</p>
+                    <p class="dark:text-gray-600 group relative">
+                        <strong>{{ __('message.user.username') }}:</strong>
+                        {{ $user->username }}
+                        <span
+                            class="hidden group-hover:block -bottom-12 absolute p-2 bg-slate-400 rounded before:bg-slate-400 before:h-4 before:w-4 before:block before:rotate-45 before:absolute before:-top-1 before:right-2">
+                            {{ __('Create At') }} {{ formatDate($user->created_at) }}
+                        </span>
+                    </p>
                     <p class="dark:text-gray-600"><strong>Email:</strong> {{ $user->email }}</p>
                     <div class="flex justify-end mt-4 pb-4">
                         <a href="{{ route('articles.createWithId', $user->id) }} "
