@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'is_admin' => true,
             'is_active' => true,
         ]);
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             User::factory()
                 ->has(Article::factory()->count(rand(0, 3)), 'articles')
                 ->create();

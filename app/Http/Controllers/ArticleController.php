@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ArticleRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
+    const DEFAULT_LIMIT = 15;
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $articles = DB::table('articles')->get();
-
+        $articles = DB::table('articles')->paginate(self::DEFAULT_LIMIT, ['*'], 'page', $request->input('page') ?? 1);
         return view('articles.index')->with('articles', $articles);
     }
 

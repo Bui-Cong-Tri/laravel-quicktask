@@ -6,16 +6,18 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Article;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    const DEFAULT_LIMIT = 15;
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $users = User::paginate(self::DEFAULT_LIMIT, ['*'], 'page', $request->input('page') ?? 1);
 
         return view('users.index')->with('users', $users);
     }

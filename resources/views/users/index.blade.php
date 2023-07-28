@@ -12,6 +12,9 @@
               {{ __('Create New User') }}
             </a>
           </div>
+          <div class="mt-4">
+            {{ $users->links('components.pagination') }}
+          </div>
           <table class="w-full table-auto dark:text-gray-400">
             <thead>
               <tr>
@@ -61,6 +64,9 @@
               @endforeach
             </tbody>
           </table>
+          <div class="mt-4">
+            {{ $users->links('components.pagination') }}
+          </div>
         </div>
       </div>
     </div>
