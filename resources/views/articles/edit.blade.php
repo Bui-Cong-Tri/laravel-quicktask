@@ -8,6 +8,8 @@
           <form action="{{ route('articles.update', $article->id) }}" method="POST">
             @csrf
             @method('PUT')
+            <input name="author_id" value="{{ $article->author_id }}" type="hidden">
+
             <div class="mb-4">
               <label for="title"
                 class="block text-sm font-medium text-gray-700 dark:text-gray-300">

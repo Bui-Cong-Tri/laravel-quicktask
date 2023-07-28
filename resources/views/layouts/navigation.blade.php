@@ -18,11 +18,15 @@
             {{ __('Dashboard') }}
           </x-nav-link>
         </div>
-        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-          <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
-            {{ __('User') }}
-          </x-nav-link>
-        </div>
+        @auth
+          @if (Auth::user()->is_admin)
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+              <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                {{ __('User') }}
+              </x-nav-link>
+            </div>
+          @endif
+        @endauth
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
           <x-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
             {{ __('Article') }}

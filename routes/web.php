@@ -30,7 +30,7 @@ Route::prefix('/users')->middleware('checkAdmin')->name('users.')->controller(Us
     Route::post('/', 'store')->name('store');
     Route::get('/{user}', 'show')->name('show');
     Route::get('/{user}/edit', 'edit')->name('edit');
-    Route::put('/{user}', 'update')->name('update');
+    Route::patch('/{user}', 'update')->name('update');
     Route::delete('/{user}', 'destroy')->name('destroy');
 });
 

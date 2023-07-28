@@ -17,19 +17,22 @@
               {{ $paragraph }}</p>
           @endforeach
         </div>
-        <div class="mt-4 flex justify-end pb-4">
-          <a href="{{ route('articles.edit', ['article' => $article->id]) }}"
-            class="mr-2 block rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
-            {{ __('Edit') }}
-          </a>
-          <form method="POST"
-            action="{{ route('articles.destroy', $article->id) }}"class="block mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-            @csrf
-            @method('DELETE')
-            <button type="submit"
-              data-confirm="{{ __('Confirm Delete') }}">{{ __('Delete') }}</button>
-          </form>
-        </div>
+        @auth
+          @if(Auth::id() === $article->author_id || Auth::user()->is_admin)
+          <div class="mt-4 flex justify-end pb-4">
+            <a href="{{ route('articles.edit', ['article' => $article->id]) }}"
+              class="mr-2 block rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
+              {{ __('Edit') }}
+            </a>
+            <form method="POST"
+              action="{{ route('articles.destroy', $article->id) }}"class="block mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+              @csrf
+              @method('DELETE')
+              <button type="submit" data-confirm="{{ __('Confirm Delete') }}">{{ __('Delete') }}</button>
+            </form>
+          </div>
+          @endif
+        @endauth
       </div>
     </div>
   </div>

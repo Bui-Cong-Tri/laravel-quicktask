@@ -25,7 +25,10 @@ return [
             'title' => 'Chỉnh sửa bài viết',
         ],
         'create' => [
-            'title' => 'Create article',
+            'title' => 'Tạo bài viết',
+        ],
+        'update' => [
+            'success' => 'Cập nhật bài viết thành công',
         ],
         'delete' => [
             'success' => 'Tạo bài viết thành công',

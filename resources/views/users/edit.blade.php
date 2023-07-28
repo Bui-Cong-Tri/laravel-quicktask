@@ -8,7 +8,8 @@
             {{ __('message.user.edit.title') }}</h2>
           <form action="{{ route('users.update', $user->id) }}" method="POST">
             @csrf
-            @method('PUT')
+            @method('PATCH')
+            <input type="hidden" name="id" value="{{ $user->id }}" />
             <div class="mb-4">
               <label for="username"
                 class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('message.user.username') }}</label>

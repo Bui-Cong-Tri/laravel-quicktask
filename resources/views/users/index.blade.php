@@ -33,34 +33,36 @@
             </thead>
             <tbody>
               @foreach ($users as $user)
-                <tr>
-                  <td class="border px-4 py-2">
-                    {{ $user->id }}</td>
-                  <td class="border px-4 py-2">
-                    {{ $user->username }}</td>
-                  <td class="border px-4 py-2">
-                    {{ $user->email }}</td>
-                  <td class="border px-4 py-2">
-                    {{ formatDate($user->created_at) }}
-                  </td>
-                  <td class="flex justify-evenly border px-4 py-2">
-                    <a href="{{ route('users.show', $user->id) }}"
-                      class="block rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
-                      {{ __('View') }}
-                    </a>
-                    <a href="{{ route('users.edit', $user->id) }}"
-                      class="block rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-700">
-                      {{ __('Edit') }}
-                    </a>
-                    <form method="POST"
-                      action="{{ route('users.destroy', $user->id) }}"class="block mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit"
-                        data-confirm="{{ __('Confirm Delete') }}">{{ __('Delete') }}</button>
-                    </form>
-                  </td>
-                </tr>
+                @unless ($user->id === Auth::id())
+                  <tr>
+                    <td class="border px-4 py-2">
+                      {{ $user->id }}</td>
+                    <td class="border px-4 py-2">
+                      {{ $user->username }}</td>
+                    <td class="border px-4 py-2">
+                      {{ $user->email }}</td>
+                    <td class="border px-4 py-2">
+                      {{ formatDate($user->created_at) }}
+                    </td>
+                    <td class="flex justify-evenly border px-4 py-2">
+                      <a href="{{ route('users.show', $user->id) }}"
+                        class="block rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
+                        {{ __('View') }}
+                      </a>
+                      <a href="{{ route('users.edit', $user->id) }}"
+                        class="block rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-700">
+                        {{ __('Edit') }}
+                      </a>
+                      <form method="POST"
+                        action="{{ route('users.destroy', $user->id) }}"class="block mr-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                          data-confirm="{{ __('Confirm Delete') }}">{{ __('Delete') }}</button>
+                      </form>
+                    </td>
+                  </tr>
+                @endunless
               @endforeach
             </tbody>
           </table>

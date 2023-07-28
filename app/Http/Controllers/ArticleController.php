@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ArticleRequest;
+use App\Http\Requests\CreateArticleRequest;
+use App\Http\Requests\UpdateArticleRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,7 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        $articles = DB::table('articles')->paginate(self::DEFAULT_LIMIT, ['*'], 'page', $request->input('page') ?? 1);
+        $articles = DB::table('articles')->orderBy('created_at')->paginate(self::DEFAULT_LIMIT, ['*'], 'page', $request->input('page') ?? 1);
         return view('articles.index')->with('articles', $articles);
     }
 
@@ -34,7 +35,7 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ArticleRequest $request)
+    public function store(CreateArticleRequest $request)
     {
         $validated = $request->validated();
         $validated['body'] = json_encode(explode(PHP_EOL, str_replace("\r", '', $validated['body'])));
@@ -63,14 +64,13 @@ class ArticleController extends Controller
         $input = $article->first();
         $input->body = trim(implode(PHP_EOL, json_decode($input->body)));
 
-
         return view('articles.edit')->with('article', $input);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ArticleRequest $request, int $id)
+    public function update(UpdateArticleRequest $request, int $id)
     {
         $validated = $request->validated();
         $validated['body'] = json_encode(explode(PHP_EOL, str_replace("\r", '', $validated['body'])));
@@ -84,8 +84,12 @@ class ArticleController extends Controller
      */
     public function destroy(int $id)
     {
-        DB::table('articles')->delete($id);
+        if (Auth::id() === $id || Auth::user()->is_admin) {
+            DB::table('articles')->delete($id);
 
-        return redirect()->route('articles.index')->with('success', trans('message.article.delete.success'));
+            return redirect()->route('articles.index')->with('success', trans('message.article.delete.success'));
+        } else {
+            return redirect()->route('articles.index')->with('fail', trans('403'));
+        }
     }
 }

@@ -8,10 +8,7 @@
           <form action="{{ route('articles.store') }}" method="POST">
             @csrf
 
-            <input
-              class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none dark:text-gray-300"
-              name="author_id" value="{{ $id }}" type="text">
-
+            <input name="author_id" value="{{ $id }}" type="hidden">
             <div class="mb-4">
               <label for="title"
                 class="block text-sm font-medium text-gray-700 dark:text-gray-300">
