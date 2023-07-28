@@ -1,34 +1,26 @@
 {
-    "bootstrapped": true,
-    "ensure_newline_at_eof_on_save": true,
-    "in_process_packages": [],
-    "installed_packages": [
-        "Icon Fonts",
-        "Package Control",
-        "Phpcs",
-        "SideBarEnhancements",
-        "SublimeLinter-phpcs",
-        "Theme - Eightlime",
-        "Vue Syntax Highlight",
-        "VueFormatter",
-        "Vuejs Snippets"
-    ],
-    "phpcs_additional_args": {
-        "--standard": "Framgia",
-        "-n": ""
-    },
-    "phpcs_executable_path": "/home/framgia/.composer/vendor/bin",
-    "tab_size": 4,
-    "translate_tabs_to_spaces": true,
-    "trim_trailing_white_space_on_save": true,
-    "plugins": ["@shufo/prettier-plugin-blade", "prettier-plugin-tailwindcss"],
-    "overrides": [
-        {
-            "files": ["*.blade.php"],
-            "options": {
-                "parser": "blade",
-                "tabWidth": 4
-            }
-        }
-    ]
+  "arrowParens": "avoid",
+  "bracketSpacing": true,
+  "htmlWhitespaceSensitivity": "css",
+  "insertPragma": false,
+  "printWidth": 100,
+  "proseWrap": "always",
+  "quoteProps": "as-needed",
+  "requirePragma": false,
+  "semi": false,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "useTabs": false,
+  "sortTailwindcssClasses": true,
+  "plugins": ["@shufo/prettier-plugin-blade", "prettier-plugin-tailwindcss"],
+  "overrides": [
+    {
+      "files": ["*.blade.php"],
+      "options": {
+        "parser": "blade",
+        "tabWidth": 2
+      }
+    }
+  ]
 }
