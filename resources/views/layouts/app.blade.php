@@ -14,8 +14,7 @@
 
   <!-- Scripts -->
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-  <link rel="stylesheet"
-    href="/bower_components/light-bootstrap-dashboard/assets/css/light-bootstrap-dashboard.css">
+  <link rel="stylesheet" href="/bower_components/light-bootstrap-dashboard/assets/css/light-bootstrap-dashboard.css">
   <script src="{{ mix('js/app.js') }}" defer></script>
   <script src="{{ mix('js/outputFile.js') }}" defer></script>
 </head>
@@ -35,6 +34,18 @@
 
     <!-- Page Content -->
     <main>
+      <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 mt-4 -mb-8">
+          @if (Session::has('fail'))
+            <div class="bg-red-500 text-white p-4 rounded-lg shadow-md mb-4 dark:bg-red-800 mx-auto">
+              {{Session::get('fail') }}
+            </div>
+          @endif
+          @if (Session::has('success'))
+            <div class="bg-green-500 text-white p-4 rounded-lg shadow-md mb-4 dark:bg-green-800 mx-auto">
+              {{Session::get('success') }}
+            </div>
+          @endif
+      </div>
       {{ $slot }}
     </main>
   </div>

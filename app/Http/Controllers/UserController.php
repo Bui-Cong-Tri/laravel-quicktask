@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Article;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -17,7 +18,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::paginate(self::DEFAULT_LIMIT, ['*'], 'page', $request->input('page') ?? 1);
+        $users = User::orderBy('created_at')->paginate(self::DEFAULT_LIMIT, ['*'], 'page', $request->input('page') ?? 1);
 
         return view('users.index')->with('users', $users);
     }
@@ -83,12 +84,15 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        if ($user->id === Auth::id() || Auth::user()->is_admin){
         DB::transaction(function () use ($user) {
             $user->load('articles');
             Article::destroy($user->articles->pluck('id'));
             $user->delete();
         });
 
-        return redirect()->route('users.index')->with('success', trans('message.user.destroy.success'));
+        return redirect()->route('users.index')->with('success', trans('message.user.destroy.success'));}else {
+            redirect()->route('users.index')->with('fail', trans('403'));
+        }
     }
 }

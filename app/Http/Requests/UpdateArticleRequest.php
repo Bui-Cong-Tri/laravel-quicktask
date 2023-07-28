@@ -3,15 +3,16 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
-class UpdateUserRequest extends FormRequest
+class UpdateArticleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return intval($this->author_id) === Auth::id() || Auth::user()->is_admin;
     }
 
     /**
@@ -22,10 +23,10 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|int',
-            'fullname' => 'required|string|max:255',
-            'username' => 'required|string|max:255',
-            'email' => 'required|email',
+            'author_id' => 'required|integer',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:300',
+            'body' => 'required|string',
         ];
     }
 }

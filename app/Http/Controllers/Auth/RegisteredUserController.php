@@ -35,18 +35,19 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+        User::unguarded(function () use ($request) {
+            $user = User::create([
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'is_active' => true,
+                'email_verified_at' => now(),
+            ]);
+            event(new Registered($user));
 
-        $user = User::create([
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'is_active' => true,
-            'email_verified_at' => now(),
-        ]);
+            Auth::login($user);
+        });
 
-        event(new Registered($user));
-
-        Auth::login($user);
         return redirect(RouteServiceProvider::HOME);
     }
 }

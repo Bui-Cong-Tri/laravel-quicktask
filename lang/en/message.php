@@ -24,6 +24,9 @@ return [
         'edit' => [
             'title' => 'Edit article',
         ],
+        'update' => [
+            'success' => 'Article updated successfully!',
+        ],
         'create' => [
             'title' => 'Create article',
         ],
